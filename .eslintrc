@@ -1,0 +1,15 @@
+{
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-react"],
+  "rules": {
+    "react/jsx-no-bind": [2, {
+      "allowArrowFunctions": true,
+      "allowBind": true,
+      "ignoreRefs": true
+    }]
+  },
+  "env": {
+    "browser": true,
+    "jest": true
+  }
+}
