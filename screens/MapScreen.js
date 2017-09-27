@@ -32,7 +32,9 @@ class MapScreen extends Component {
   }
 
   onButtonPress = () => {
-    this.props.fetchJobs(this.state.region)
+    this.props.fetchJobs(this.state.region, () => {
+      this.props.navigation.navigate('deck')
+    })
   }
 
   render () {
@@ -66,7 +68,8 @@ class MapScreen extends Component {
 }
 
 MapScreen.propTypes = {
-  fetchJobs: PropTypes.func
+  fetchJobs: PropTypes.func,
+  navigation: PropTypes.object
 }
 
 const styles = {
