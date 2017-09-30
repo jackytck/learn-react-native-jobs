@@ -1,21 +1,37 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import {
-  View,
-  Text
-} from 'react-native'
-import { connect } from 'react-redux'
-import { MapView } from 'expo'
-import {
-  Card,
-  Button
+  Button,
+  Card
 } from 'react-native-elements'
+import {
+  Platform,
+  Text,
+  View
+} from 'react-native'
+import React, { Component } from 'react'
+
+import { MapView } from 'expo'
+import PropTypes from 'prop-types'
 import Swipe from '../components/Swipe'
+import { connect } from 'react-redux'
 
 class DeckScreen extends Component {
-  renderCard ({ jobtitle, company, formattedRelativeTime, snippet }) {
+  renderCard ({ jobtitle, company, formattedRelativeTime, snippet, longitude, latitude }) {
+    const initialRegion = {
+      longitude: longitude,
+      latitude: latitude,
+      latitudeDelta: 0.045,
+      longitudeDelta: 0.02
+    }
     return (
       <Card title={jobtitle}>
+        <View style={{ height: 300 }}>
+          <MapView
+            scrollEnabled={false}
+            style={{ flex: 1 }}
+            cacheEnabled={Platform.OS === 'android'}
+            initialRegion={initialRegion}
+          />
+        </View>
         <View style={styles.detailWrapper}>
           <Text>{company}</Text>
           <Text>{formattedRelativeTime}</Text>
@@ -40,6 +56,7 @@ class DeckScreen extends Component {
           data={this.props.jobs}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
+          keyProp='jobkey'
         />
       </View>
     )

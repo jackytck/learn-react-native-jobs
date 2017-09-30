@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import {
   Animated,
   Dimensions,
   LayoutAnimation,
   PanResponder,
+  Platform,
   UIManager,
   View
 } from 'react-native'
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
 
 const SCREEN_WIDTH = Dimensions.get('window').width
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.4
@@ -98,7 +100,7 @@ class Deck extends Component {
     if (index >= this.props.data.length) {
       return this.props.renderNoMoreCards()
     }
-    return this.props.data.map((item, i) => {
+    const deck = this.props.data.map((item, i) => {
       if (i < index) {
         return
       }
@@ -116,12 +118,14 @@ class Deck extends Component {
       return (
         <Animated.View
           key={item.id}
-          style={[styles.cardStyle, { top: 10 * (i - index) }]}
+          style={[styles.cardStyle, { top: 10 * (i - index), zIndex: -i }]}
         >
           {this.props.renderCard(item)}
         </Animated.View>
       )
-    }).reverse()
+    })
+
+    return Platform.OS === 'android' ? deck : deck.reverse()
   }
 
   render () {
