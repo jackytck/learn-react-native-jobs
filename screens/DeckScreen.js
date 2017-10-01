@@ -1,7 +1,5 @@
-import {
-  Button,
-  Card
-} from 'react-native-elements'
+import * as actions from '../actions'
+
 import {
   Platform,
   Text,
@@ -9,6 +7,9 @@ import {
 } from 'react-native'
 import React, { Component } from 'react'
 
+import {
+  Card
+} from 'react-native-elements'
 import { MapView } from 'expo'
 import PropTypes from 'prop-types'
 import Swipe from '../components/Swipe'
@@ -51,11 +52,12 @@ class DeckScreen extends Component {
 
   render () {
     return (
-      <View>
+      <View style={{ marginTop: 10 }}>
         <Swipe
           data={this.props.jobs}
           renderCard={this.renderCard}
           renderNoMoreCards={this.renderNoMoreCards}
+          onSwipeRight={job => this.props.likeJob(job)}
           keyProp='jobkey'
         />
       </View>
@@ -64,7 +66,8 @@ class DeckScreen extends Component {
 }
 
 DeckScreen.propTypes = {
-  jobs: PropTypes.array
+  jobs: PropTypes.array,
+  likeJob: PropTypes.func
 }
 
 const styles = {
@@ -81,4 +84,4 @@ function mapStateToProps ({ jobs }) {
   }
 }
 
-export default connect(mapStateToProps)(DeckScreen)
+export default connect(mapStateToProps, actions)(DeckScreen)
