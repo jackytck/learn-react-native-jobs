@@ -2,12 +2,13 @@ import {
   Button,
   Card
 } from 'react-native-elements'
-import React, { Component } from 'react'
 import {
+  Linking,
   ScrollView,
   Text,
   View
 } from 'react-native'
+import React, { Component } from 'react'
 
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
@@ -27,13 +28,20 @@ class ReviewScreen extends Component {
 
   renderLikedJobs () {
     return this.props.likedJobs.map(job => {
+      const { company, formattedRelativeTime, url } = job
+
       return (
         <Card>
           <View style={{ height: 200 }}>
             <View style={styles.detailWrapper}>
-              <Text style={styles.italics}>{job.company}</Text>
-              <Text style={styles.italics}>{job.formattedRelativeTime}</Text>
+              <Text style={styles.italics}>{company}</Text>
+              <Text style={styles.italics}>{formattedRelativeTime}</Text>
             </View>
+            <Button
+              title='Apply Now!'
+              backgroundColor='#03A9F4'
+              onPress={() => Linking.openURL(url)}
+            />
           </View>
         </Card>
       )
