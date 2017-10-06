@@ -1,10 +1,12 @@
 import {
+  CLEAR_LIKED_JOBS,
   FETCH_JOBS,
   LIKE_JOB
 } from './types'
 
 import axios from 'axios'
 import qs from 'qs'
+
 // import reverseGeocode from 'latlng-to-zip'
 
 const JOB_ROOT_URL = 'http://api.indeed.com/ads/apisearch?'
@@ -47,4 +49,8 @@ export const likeJob = job => {
     type: LIKE_JOB,
     payload: job
   }
+}
+
+export const clearLikedJobs = () => {
+  return { type: CLEAR_LIKED_JOBS }
 }
