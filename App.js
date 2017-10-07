@@ -1,18 +1,18 @@
-import React from 'react'
-import { StyleSheet, View } from 'react-native'
 import {
-  TabNavigator,
-  StackNavigator
+  StackNavigator,
+  TabNavigator
 } from 'react-navigation'
-import { Provider } from 'react-redux'
+import { StyleSheet, View } from 'react-native'
 
-import store from './store'
 import AuthScreen from './screens/AuthScreen'
-import WelcomeScreen from './screens/WelcomeScreen'
-import MapScreen from './screens/MapScreen'
 import DeckScreen from './screens/DeckScreen'
-import SettingsScreen from './screens/SettingsScreen'
+import MapScreen from './screens/MapScreen'
+import { Provider } from 'react-redux'
+import React from 'react'
 import ReviewScreen from './screens/ReviewScreen'
+import SettingsScreen from './screens/SettingsScreen'
+import WelcomeScreen from './screens/WelcomeScreen'
+import store from './store'
 
 export default class App extends React.Component {
   render () {
@@ -28,6 +28,10 @@ export default class App extends React.Component {
               review: { screen: ReviewScreen },
               settings: { screen: SettingsScreen }
             })
+          }
+        }, {
+          tabBarOptions: {
+            labelStyle: { fontSize: 12 }
           }
         })
       }

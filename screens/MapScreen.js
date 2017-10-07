@@ -1,18 +1,29 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import {
-  View,
-  ActivityIndicator
-} from 'react-native'
-import { MapView } from 'expo'
-import { connect } from 'react-redux'
-import {
-  Button
-} from 'react-native-elements'
-
 import * as actions from '../actions'
 
+import {
+  ActivityIndicator,
+  View
+} from 'react-native'
+import {
+  Button,
+  Icon
+} from 'react-native-elements'
+import React, { Component } from 'react'
+
+import { MapView } from 'expo'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+
 class MapScreen extends Component {
+  static navigationOptions = {
+    title: 'Map',
+    tabBar: {
+      icon: ({ tintColor }) => {
+        return <Icon name='my-location' size={30} color={tintColor} />
+      }
+    }
+  }
+
   state = {
     mapLoaded: false,
     region: {

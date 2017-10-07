@@ -1,6 +1,7 @@
 import {
   Button,
-  Card
+  Card,
+  Icon
 } from 'react-native-elements'
 import {
   Linking,
@@ -18,6 +19,11 @@ import { connect } from 'react-redux'
 class ReviewScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
     title: 'Review Jobs',
+    tabBar: {
+      icon: ({ tintColor }) => {
+        return <Icon name='favorite' size={30} color={tintColor} />
+      }
+    },
     headerRight: (
       <Button
         title='Settings'
