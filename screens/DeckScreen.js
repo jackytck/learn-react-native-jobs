@@ -1,15 +1,16 @@
 import * as actions from '../actions'
 
 import {
+  Button,
+  Card
+} from 'react-native-elements'
+import {
   Platform,
   Text,
   View
 } from 'react-native'
 import React, { Component } from 'react'
 
-import {
-  Card
-} from 'react-native-elements'
 import { MapView } from 'expo'
 import PropTypes from 'prop-types'
 import Swipe from '../components/Swipe'
@@ -44,9 +45,17 @@ class DeckScreen extends Component {
     )
   }
 
-  renderNoMoreCards () {
+  renderNoMoreCards = () => {
     return (
-      <Card title='No more jobs' />
+      <Card title='No more jobs'>
+        <Button
+          title='Back To Map'
+          large
+          icon={{ name: 'my-location' }}
+          backgroundColor='#03A9F4'
+          onPress={() => this.props.navigation.navigate('map')}
+        />
+      </Card>
     )
   }
 
@@ -67,7 +76,8 @@ class DeckScreen extends Component {
 
 DeckScreen.propTypes = {
   jobs: PropTypes.array,
-  likeJob: PropTypes.func
+  likeJob: PropTypes.func,
+  navigation: PropTypes.func
 }
 
 const styles = {
