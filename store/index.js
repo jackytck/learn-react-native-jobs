@@ -22,5 +22,6 @@ persistStore(store, {
   storage: AsyncStorage,
   whitelist: ['likedJobs']
 })
+// }).purge() // to clear the cache
 
 export default store
